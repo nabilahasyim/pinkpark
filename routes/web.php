@@ -14,7 +14,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::resource('/kategori', KategoriController::class);
     Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
     Route::get('/member', [MemberController::class, 'index'])->name('member.index');
     Route::get('/transaksi-parkir', [TransaksiController::class, 'index'])->name('transaksi.index');
