@@ -69,9 +69,12 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('logout') }}" class="text-danger">
-                <i class="fas fa-sign-out-alt"></i> Keluar
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="btn btn-link text-danger text-start text-decoration-none d-block w-100 p-0" style="padding: 12px 20px !important;">
+                    <i class="fas fa-sign-out-alt"></i> Keluar
+                </button>
+            </form>
         </li>
     </ul>
 </nav>

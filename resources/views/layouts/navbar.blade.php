@@ -50,14 +50,21 @@
             <!-- Profile Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://ui-avatars.com/api/?name=Admin+PinkPark&background=FF4F81&color=fff" alt="Profile" class="profile-img me-2">
-                    <span class="d-none d-md-inline fw-semibold">Admin</span>
+                    <img src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name ?? 'User') }}&background=FF4F81&color=fff" alt="Profile" class="profile-img me-2">
+                    <span class="d-none d-md-inline fw-semibold">{{ Auth::user()->name ?? 'User' }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="navbarDropdownProfile">
                     <li><a class="dropdown-item" href="{{ route('profil') }}"><i class="fas fa-user fa-sm fa-fw me-2 text-muted"></i> Profil Saya</a></li>
                     <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-sm fa-fw me-2 text-muted"></i> Pengaturan</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Keluar</a></li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="dropdown-item text-danger border-0 bg-transparent" style="width: 100%; text-align: left;">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw me-2"></i> Keluar
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>
