@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/kategori', KategoriController::class);
     Route::resource('/produk', ProdukController::class);
-    Route::get('/member', [MemberController::class, 'index'])->name('member.index');
+    Route::resource('/member', MemberController::class);
     Route::get('/transaksi-parkir', [TransaksiController::class, 'index'])->name('transaksi.index');
 
     // Master Data
