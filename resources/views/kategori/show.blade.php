@@ -42,7 +42,7 @@
             <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-warning text-dark px-4 rounded-pill">
                 <i class="fa-solid fa-pen-to-square me-2"></i> Edit
             </a>
-            <form action="{{ route('kategori.destroy', $kategori->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">
+            <form action="{{ route('kategori.destroy', $kategori->id) }}" method="POST" class="form-delete">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger px-4 rounded-pill">

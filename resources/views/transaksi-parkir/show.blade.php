@@ -62,7 +62,7 @@
             <a href="{{ route('transaksi.edit', $transaksi_parkir->id) }}" class="btn btn-warning text-dark px-4 rounded-pill">
                 <i class="fa-solid fa-pen-to-square me-2"></i> Edit
             </a>
-            <form action="{{ route('transaksi.destroy', $transaksi_parkir->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus transaksi ini?');">
+            <form action="{{ route('transaksi.destroy', $transaksi_parkir->id) }}" method="POST" class="form-delete">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger px-4 rounded-pill">

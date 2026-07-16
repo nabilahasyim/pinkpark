@@ -58,7 +58,7 @@
                                     <a href="{{ route('produk.edit', $produk->id) }}" class="btn btn-sm btn-warning text-dark rounded-pill px-3">
                                         <i class="fa-solid fa-pen-to-square"></i> Edit
                                     </a>
-                                    <form action="{{ route('produk.destroy', $produk->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
+                                    <form action="{{ route('produk.destroy', $produk->id) }}" method="POST" class="d-inline form-delete">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger rounded-pill px-3">

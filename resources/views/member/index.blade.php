@@ -50,7 +50,7 @@
                                     <a href="{{ route('member.edit', $member->id) }}" class="btn btn-sm btn-warning text-dark rounded-pill px-3">
                                         <i class="fa-solid fa-pen-to-square"></i> Edit
                                     </a>
-                                    <form action="{{ route('member.destroy', $member->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Apakah Anda yakin ingin menghapus member ini?');">
+                                    <form action="{{ route('member.destroy', $member->id) }}" method="POST" class="d-inline form-delete">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger rounded-pill px-3">
