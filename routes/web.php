@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TransaksiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -8,9 +13,11 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard', ['title' => 'Dashboard']);
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
+    Route::get('/member', [MemberController::class, 'index'])->name('member.index');
+    Route::get('/transaksi-parkir', [TransaksiController::class, 'index'])->name('transaksi.index');
 
     // Master Data
     Route::prefix('master-data')->name('master-data.')->group(function () {
