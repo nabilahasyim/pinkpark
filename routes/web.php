@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TransaksiParkirController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,11 +14,19 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::resource('/kategori', KategoriController::class);
-    Route::resource('/produk', ProdukController::class);
-    Route::resource('/member', MemberController::class);
-    Route::get('/transaksi-parkir', [TransaksiController::class, 'index'])->name('transaksi.index');
-
+    Route::resource('/transaksi-parkir', TransaksiParkirController::class)->names('transaksi');
+    
+    // Admin only routes
+    Route::middleware(function ($request, $next) {
+        if (auth()->check() && auth()->user()->role !== 'admin') {
+            abort(403, 'Akses Ditolak. Anda bukan admin.');
+        }
+        return $next($request);
+    })->group(function () {
+        Route::resource('/kategori', KategoriController::class);
+        Route::resource('/produk', ProdukController::class);
+        Route::resource('/member', MemberController::class);
+    });
     // Master Data
     Route::prefix('master-data')->name('master-data.')->group(function () {
         Route::get('/jenis-kendaraan', function () {

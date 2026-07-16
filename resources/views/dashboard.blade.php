@@ -22,7 +22,7 @@
                         <i class="fa-solid fa-list fs-3 text-pink"></i>
                     </div>
                     <h6 class="text-muted fw-bold mb-1 text-uppercase" style="letter-spacing: 0.5px; font-size: 0.8rem;">Kategori</h6>
-                    <h2 class="fw-bold mb-0 text-dark">12</h2>
+                    <h2 class="fw-bold mb-0 text-dark">{{ $kategoriCount }}</h2>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                         <i class="fa-solid fa-box fs-3 text-pink"></i>
                     </div>
                     <h6 class="text-muted fw-bold mb-1 text-uppercase" style="letter-spacing: 0.5px; font-size: 0.8rem;">Produk</h6>
-                    <h2 class="fw-bold mb-0 text-dark">45</h2>
+                    <h2 class="fw-bold mb-0 text-dark">{{ $produkCount }}</h2>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                         <i class="fa-solid fa-users fs-3 text-pink"></i>
                     </div>
                     <h6 class="text-muted fw-bold mb-1 text-uppercase" style="letter-spacing: 0.5px; font-size: 0.8rem;">Member</h6>
-                    <h2 class="fw-bold mb-0 text-dark">150</h2>
+                    <h2 class="fw-bold mb-0 text-dark">{{ $memberCount }}</h2>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                         <i class="fa-solid fa-receipt fs-3 text-pink"></i>
                     </div>
                     <h6 class="text-muted fw-bold mb-1 text-uppercase" style="letter-spacing: 0.5px; font-size: 0.8rem;">Transaksi Parkir</h6>
-                    <h2 class="fw-bold mb-0 text-dark">320</h2>
+                    <h2 class="fw-bold mb-0 text-dark">{{ $transaksiCount }}</h2>
                 </div>
             </div>
         </div>
@@ -78,30 +78,30 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse($aktivitasTerbaru as $aktivitas)
                         <tr>
-                            <td class="ps-4 text-pink fw-semibold">#TRX-001</td>
-                            <td><i class="fa-solid fa-arrow-right-to-bracket text-success me-2"></i> Mobil B 1234 CD Masuk</td>
-                            <td class="text-muted">{{ now()->format('d M Y, H:i') }}</td>
-                            <td class="pe-4 text-end"><span class="badge bg-success-subtle text-success rounded-pill px-3">Selesai</span></td>
+                            <td class="ps-4 text-pink fw-semibold">{{ $aktivitas->kode_transaksi }}</td>
+                            <td>
+                                @if($aktivitas->status == 'Masuk')
+                                    <i class="fa-solid fa-arrow-right-to-bracket text-warning me-2"></i> {{ $aktivitas->jenis_kendaraan }} {{ $aktivitas->nomor_polisi }} Masuk
+                                @else
+                                    <i class="fa-solid fa-arrow-right-from-bracket text-success me-2"></i> {{ $aktivitas->jenis_kendaraan }} {{ $aktivitas->nomor_polisi }} Keluar
+                                @endif
+                            </td>
+                            <td class="text-muted">{{ $aktivitas->created_at->format('d M Y, H:i') }}</td>
+                            <td class="pe-4 text-end">
+                                @if($aktivitas->status == 'Masuk')
+                                    <span class="badge bg-warning-subtle text-warning rounded-pill px-3">Masuk</span>
+                                @else
+                                    <span class="badge bg-success-subtle text-success rounded-pill px-3">Keluar</span>
+                                @endif
+                            </td>
                         </tr>
+                        @empty
                         <tr>
-                            <td class="ps-4 text-pink fw-semibold">#TRX-002</td>
-                            <td><i class="fa-solid fa-arrow-right-from-bracket text-danger me-2"></i> Motor D 5678 EF Keluar</td>
-                            <td class="text-muted">{{ now()->subMinutes(15)->format('d M Y, H:i') }}</td>
-                            <td class="pe-4 text-end"><span class="badge bg-success-subtle text-success rounded-pill px-3">Selesai</span></td>
+                            <td colspan="4" class="text-center py-3 text-muted">Belum ada aktivitas terbaru.</td>
                         </tr>
-                        <tr>
-                            <td class="ps-4 text-pink fw-semibold">#MEM-010</td>
-                            <td><i class="fa-solid fa-user-plus text-primary me-2"></i> Member Baru: Budi Santoso</td>
-                            <td class="text-muted">{{ now()->subHours(2)->format('d M Y, H:i') }}</td>
-                            <td class="pe-4 text-end"><span class="badge bg-primary-subtle text-primary rounded-pill px-3">Baru</span></td>
-                        </tr>
-                        <tr>
-                            <td class="ps-4 text-pink fw-semibold">#PROD-05</td>
-                            <td><i class="fa-solid fa-boxes-stacked text-info me-2"></i> Update Stok Produk: Kopi Hitam</td>
-                            <td class="text-muted">{{ now()->subDays(1)->format('d M Y, H:i') }}</td>
-                            <td class="pe-4 text-end"><span class="badge bg-info-subtle text-info rounded-pill px-3">Update</span></td>
-                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

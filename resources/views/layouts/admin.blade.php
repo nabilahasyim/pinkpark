@@ -88,6 +88,7 @@
         <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
             <i class="fa-solid fa-house me-3 w-20px text-center"></i> Dashboard
         </a>
+        @if(auth()->user() && auth()->user()->role === 'admin')
         <a href="{{ route('kategori.index') }}" class="{{ request()->routeIs('kategori.*') ? 'active' : '' }}">
             <i class="fa-solid fa-list me-3 w-20px text-center"></i> Kategori
         </a>
@@ -97,6 +98,7 @@
         <a href="{{ route('member.index') }}" class="{{ request()->routeIs('member.*') ? 'active' : '' }}">
             <i class="fa-solid fa-users me-3 w-20px text-center"></i> Member
         </a>
+        @endif
         <a href="{{ route('transaksi.index') }}" class="{{ request()->routeIs('transaksi.*') ? 'active' : '' }}">
             <i class="fa-solid fa-receipt me-3 w-20px text-center"></i> Transaksi Parkir
         </a>

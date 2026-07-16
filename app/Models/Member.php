@@ -17,4 +17,9 @@ class Member extends Model
         'jenis_kendaraan',
         'nomor_polisi',
     ];
+
+    public function transaksiParkirs()
+    {
+        return $this->hasMany(TransaksiParkir::class);
+    }
 }
